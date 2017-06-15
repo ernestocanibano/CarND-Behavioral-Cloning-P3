@@ -54,17 +54,42 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
-
-The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). 
+The model is based on the Nvidia paper: [End to End Learning for Self-Driving Cars](CarND-Behavioral-Cloning-P3/examples/end-to-end-dl-using-px.pdf). I began with the same model of the paper but with the size of the input images modified to 160x320 intead 66x200. I have added some Dropout layers too.
 
 ![alt text][image1]
 
+The model is detailed in the following table.
+
+| Layer         		|     Description	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| Input         		| 160x320x3 RGB image   						| 
+| Convolution 5x5     	| 2x2 stride, valid padding, outputs 78x158x24 	|
+| RELU					|												|
+| Convolution 5x5	    | 2x2 stride, valid padding, outputs 37x77x36   |
+| RELU 					|  												|
+| Convolution 5x5	    | 2x2 stride, valid padding, outputs 19x37x48   |
+| RELU 					|  												|
+| Convolution 3x3	    | 1x1 stride, valid padding, outputs 17x35x64   |
+| RELU 					|  												|
+| Convolution 5x3	    | 1x1 stride, valid padding, outputs 15x33x64   |
+| RELU 					|  												|
+| Fully connected		| outputs 1x100        							|
+| DROPOUT 				| x.x											|
+| Fully connected		| outputs 1x50        							|
+| DROPOUT 				| x.x											|
+| Fully connected		| outputs 1x10									|
+| DROPOUT 				| x.x											|
+| Fully connected		| outputs 1x1									|
+
+
 #### 2. Attempts to reduce overfitting in the model
 
-The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
+To avoid overfitting I used the following strategies: 
+* Add dropout layers. (model.py lines 21). 
+* Collect more data: driving in counter-clockwise and doing recoverings from the left and right sides of the roads. (model.py lines 21).
+* Augment the dataset with: lateral cameras images and flipped images of the center camera. (model.py lines 21).  
 
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 10-16). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 #### 3. Model parameter tuning
 
