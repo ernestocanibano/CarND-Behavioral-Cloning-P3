@@ -68,10 +68,10 @@ def generator(table, batch_size=32):
 
 BATCH_SIZE = 32
 
-track1_forward = extractFilesFromCsv('../records/track1_forward/driving_log.csv')
-track1_reverse = extractFilesFromCsv('../records/track1_reverse/driving_log.csv')
-track1_recovering = extractFilesFromCsv('../records/track1_recovering/driving_log.csv',False)
-#track2 = extractFilesFromCsv('../records/track2/driving_log.csv',True)
+track1_forward = extractFilesFromCsv('./records/track1_forward/driving_log.csv')
+track1_reverse = extractFilesFromCsv('./records/track1_reverse/driving_log.csv')
+track1_recovering = extractFilesFromCsv('./records/track1_recovering/driving_log.csv',False)
+#track2 = extractFilesFromCsv('./records/track2/driving_log.csv',True)
 track1_forward.extend(track1_reverse)
 track1_forward.extend(track1_recovering)
 #track1_forward.extend(track2)
